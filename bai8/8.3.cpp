@@ -12,6 +12,7 @@ public:
     IntVector(int n, int value)
     {
         len = n;
+        pArr = new int[len];
         for (int i = 0; i < len; i++)
             *(pArr + i) = value;
     }
@@ -31,13 +32,18 @@ public:
     }
     void push_back(int value)
     {
-        pArr[len] = value;
-        len ++;
+        int *temp = new int[len + 1];
+        for (int i = 0; i < len; i++)
+            *(temp + i) = *(pArr + i);
+        temp[len] = value;
+        delete [] pArr;
+        pArr = temp;
+        len++;
     }
 
 private:
-    int len = 0;
-    int *pArr = new int [0];
+    int len;
+    int *pArr = nullptr;
 };
 
 int main()
