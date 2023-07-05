@@ -22,7 +22,7 @@ public:
         if (real == 0)
         {
             if (imaginary == 0)
-                cout << 0;
+                cout << "0";
             else if (imaginary == 1)
                 cout << "i";
             else if (imaginary == -1)
