@@ -22,15 +22,16 @@ public:
             return a;
         return timUocMax(b, a % b);
     }
-    static void rutGon(int &tu, int &mau)
+    friend Fraction reduce(Fraction &other)
     {
-        int uocChung = timUocMax(tu, mau);
-        tu /= uocChung;
-        mau /= uocChung;
+        int uocChung = timUocMax(other.numerator, other.denominator);
+        other.numerator /= uocChung;
+        other.denominator /= uocChung;
+        return other;
     }
     friend ostream &operator<<(ostream &os, Fraction other)
     {
-        rutGon(other.numerator, other.denominator);
+        reduce(other);
         if (other.numerator == 0)
             os << 0 << endl;
         else if (other.numerator == other.denominator)
@@ -68,9 +69,11 @@ public:
         temp.denominator = this->denominator * other.numerator;
         return temp;
     }
-    friend bool operator==(const Fraction &f1, const Fraction &f2)
+    friend int operator==(const Fraction &f1, const Fraction &f2)
     {
-        return (f1.numerator * f2.denominator == f2.numerator * f1.denominator);
+        if (f1.numerator * f2.denominator == f2.numerator * f1.denominator)
+            return 1;
+        return -1;
     }
 };
 int main()
@@ -78,11 +81,22 @@ int main()
     Fraction f1;
     Fraction f2;
     cin >> f1 >> f2;
-    cout << f1 << f2;
-    cout << "f1 + f2 = " << f1 + f2;
-    cout << "f1 / f2 = " << f1 / f2;
-    if (f1 == f2)
+    cout << "f1: " << f1;
+    cout << "f2: " << f2;
+    Fraction f3 = f1;
+    cout << "f3 = f1 = " << f3;
+    Fraction f4 = f1 + f2;
+    cout << "f1 + f2 = " << f4;
+    Fraction f5 = f1 / f2;
+    cout << "f1 / f2 = " << f5;
+    int check = f1 == f2;
+    if (check == 1)
         cout << "f1 = f2" << endl;
     else
         cout << "f1 != f2" << endl;
+    Fraction f6;
+    cout << "Enter f6 to test the reduce function: ";
+    cin >> f6;
+    cout << "Reduce f6: " << reduce(f6);
+    return 0;
 }
