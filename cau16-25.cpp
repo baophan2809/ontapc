@@ -11,6 +11,11 @@ public:
         this->numerator = 0;
         this->denominator = 1;
     }
+    Fraction (int tu, int mau)
+    {
+        this->numerator = tu;
+        this->denominator = mau;
+    }
     Fraction(const Fraction &other)
     {
         this->numerator = other.numerator;
@@ -79,8 +84,8 @@ public:
 int main()
 {
     Fraction f1;
-    Fraction f2;
-    cin >> f1 >> f2;
+    Fraction f2 (4, 10);
+    cin >> f1;
     cout << "f1: " << f1;
     cout << "f2: " << f2;
     Fraction f3 = f1;
