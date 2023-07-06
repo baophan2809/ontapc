@@ -52,9 +52,15 @@ public:
 
     long getSalary()
     {
-        if (getYob() < 1970)
-            return ((sc * 1500000) * 1.33);
-        return (sc * 1500000);
+        return sc * 1500000;
+    }
+    int getSc()
+    {
+        return sc;
+    }
+    void setSc (float value)
+    {
+        this->sc = value;
     }
 };
 
@@ -136,6 +142,15 @@ public:
             }
         }
     }
+    void increase()
+    {
+        for (int i = 0; i < n; i++)
+        {
+            Employee *temp = dynamic_cast<Employee*>(a[i]);
+            if (temp != nullptr && temp->getYob() < 1970)
+                temp->setSc(temp->getSc() * 1.33);
+        }
+    }
 };
 
 int main()
@@ -145,4 +160,6 @@ int main()
     group.display(); // check before sort
     group.sort();
     group.display(); // check after sort
+    group.increase();
+    group.display();
 }
