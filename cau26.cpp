@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
 using namespace std;
-
 class Person
 {
 private:
@@ -88,13 +86,10 @@ public:
         return 10000000 + nogs * 350000;
     }
 };
-
 class Group
 {
-private:
-    int n;        // number of people in group
+    int n;
     Person **a;
-
 public:
     void input()
     {
@@ -107,35 +102,33 @@ public:
             cout << "1. Employee" << endl;
             cout << "2. FootballPlayer" << endl;
             cin >> type;
-
             if (type == 1)
             {
-                a[i] = new Employee();
+                a[i] = new Employee ();
+                a[i]->input();
             }
-            else if (type == 2)
+            else
             {
-                a[i] = new FootballPlayer();
+                a[i] = new FootballPlayer ();
+                a[i]->input();
             }
-
-            a[i]->input();
         }
     }
-
     void display()
     {
         for (int i = 0; i < n; i++)
         {
+            cout << i + 1 << ": " << endl;
             a[i]->display();
         }
     }
-
     void sort()
     {
         for (int i = 0; i < n; i++)
         {
             for (int j = i + 1; j < n; j++)
             {
-                if (a[i]->getSalary() < a[j]->getSalary())
+                if (a[i]->getSalary() > a[j]->getSalary())
                 {
                     swap(a[i], a[j]);
                 }
@@ -151,6 +144,7 @@ public:
                 temp->setSc(temp->getSc() * 1.33);
         }
     }
+
 };
 
 int main()
@@ -161,5 +155,6 @@ int main()
     group.sort();
     group.display(); // check after sort
     group.increase();
+    group.sort();
     group.display();
 }
